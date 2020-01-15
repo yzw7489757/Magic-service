@@ -1,3 +1,7 @@
+## 简介
+
+Magic Platform Service
+
 ## 项目结构
 
 ```

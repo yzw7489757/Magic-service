@@ -10,7 +10,7 @@
     "koa"
   ],
   "scripts": {
-    "start": "NODE_ENV=dev nodemon",
+    "start": "cross-env NODE_ENV=dev nodemon",
     "build": "rm -rf dist && tsc",
     "pro": "node_modules/.bin/pm2 start --env=production",
     "stop": "node_modules/.bin/pm2 stop all"
@@ -39,6 +39,7 @@
     "@types/koa-redis": "^4.0.0",
     "@types/koa-router": "^7.4.0",
     "@types/node": "^12.12.24",
+    "cross-env": "^6.0.3",
     "nodemon": "^1.19.0",
     "pm2": "^3.5.0",
     "ts-node": "^8.1.0",
