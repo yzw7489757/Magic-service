@@ -40,6 +40,8 @@ createConnection()
       origin:'*',
       credentials:true
     }))
+   
+
     // 错误处理
     onerror(app)
     // 处理jwt 401
