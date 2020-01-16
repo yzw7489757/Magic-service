@@ -6,7 +6,7 @@ const encryption = require('crypto');
  * @param {string} content 明文
  * @returns {string} md5
  */
-function _md5(content:string):string{
+function _md5(content: string): string{
   const md5 = encryption.createHash('md5');
   return md5.update(content).digest('hex')
 }
@@ -16,7 +16,7 @@ function _md5(content:string):string{
  * @param {string} content 明文
  * @returns {string} md5 password
  */
-function encryptionPw(content:string):string{
+function encryptionPw(content: string): string{
   return _md5(`pw=${content}&key=${CYRPTO_SECRET_KEY}`)
 }
 

@@ -1,13 +1,13 @@
 import { Context } from 'koa';
 import { getManager } from 'typeorm';
 import Performance from '../entity/performance';
-import { SuccessModel } from '../utils/Response';
+import { SuccessModel, ErrorModel } from '../utils/Response';
 import { PerformanceDbRecord } from '../interfaces/performance';
 
 export default class PerformanceService {
-  static async insert(context?: Context) {
+  static async insert(context?: Context): Promise<SuccessModel|ErrorModel>{
     const performanceRepository = getManager().getRepository(Performance);
-    const recordData:PerformanceDbRecord  = context.request.body;
+    const recordData: PerformanceDbRecord  = context.request.body;
 
     const newCategory = performanceRepository.create({
       projectId: recordData.projectId,
@@ -24,18 +24,18 @@ export default class PerformanceService {
     return new SuccessModel(null, '添加成功');
   }
 
-  static async list(context?:Context){
+  static async list(context?: Context): Promise<SuccessModel|ErrorModel>{
     const performanceRepository = getManager().getRepository(Performance);
+    const recordData: PerformanceDbRecord  = context.request.body;
     const [result = [],count] = await performanceRepository.findAndCount();
 
     // result.forEach(item=>{
     //   item.record.forEach(JSON.parse())
     // })
-
     return new SuccessModel({
-        list: result,
-        count
-    })
+      list: result,
+      count
+  })
 
   }
 }

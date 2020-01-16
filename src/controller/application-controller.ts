@@ -1,4 +1,4 @@
-import ProjectService from '../service/project-service';
+import ProjectService from '../service/application-service';
 import { Context } from 'koa';
 
 export default class ProjectController {
@@ -9,8 +9,9 @@ export default class ProjectController {
    * @param {Context} ctx
    * @memberof ProjectController
    */
-  static async addNewProject (ctx:Context){
+  static async addNewProject (ctx: Context): Promise<Context>{
     ctx.body = await ProjectService.addNewProject(ctx)
+    return ctx
   }
 
   /**
@@ -20,7 +21,8 @@ export default class ProjectController {
    * @param {Context} ctx
    * @memberof ProjectController
    */
-  static async getProjectList(ctx:Context){
+  static async getProjectList(ctx: Context): Promise<Context>{
     ctx.body = await ProjectService.getProjectList(ctx)
+    return ctx
   }
 }

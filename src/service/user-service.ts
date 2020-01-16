@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 import { getManager } from 'typeorm';
 import RegisteredUser from '../entity/RegisteredUser';
-import { ILogin } from '../interfaces/user';
+import { Login } from '../interfaces/user';
 import { SuccessModel, ErrorModel } from '../utils/Response';
 import encryptionPw from '../utils/cryp';
 import { getToken } from '../utils/Token';
@@ -15,7 +15,7 @@ export default class UserService {
    * @returns 操作结果
    * @memberof UserService
    */
-  static async register(context?:Context){
+  static async register(context?: Context): Promise<ErrorModel|SuccessModel>{
     const registerRepository = getManager().getRepository(RegisteredUser);
     const registerData: RegisteredUser = context.request.body;
 
@@ -52,9 +52,9 @@ export default class UserService {
  * @param {Context} [context]
  * @memberof UserService
  */
-static async login(context?:Context){
+static async login(context?: Context): Promise<ErrorModel|SuccessModel>{
     const registerRepository = getManager().getRepository(RegisteredUser);
-    const registerData:ILogin  = context.request.body;
+    const registerData: Login  = context.request.body;
     
     const result = await registerRepository.findOne({
       userName: registerData.userName

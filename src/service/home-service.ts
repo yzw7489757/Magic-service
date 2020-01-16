@@ -3,7 +3,7 @@ import { getManager } from 'typeorm';
 import Category from '../entity/category';
 
 export default class HomeService {
-  static async hello(context?: Context) {
+  static async hello(context?: Context): Promise<Context>{
     const categoryRepository = getManager().getRepository(Category);
     const newCategory = categoryRepository.create({
       name: 'Jack'
@@ -11,6 +11,6 @@ export default class HomeService {
 
     await categoryRepository.save(newCategory);
 
-    return 'hello world';
+    return context
   }
 }

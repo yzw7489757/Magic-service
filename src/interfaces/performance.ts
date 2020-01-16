@@ -1,21 +1,21 @@
-interface IPerformance{
+interface Performance{
     projectId: number;
-    record: IRecord[];
+    record: Record[];
     createTime: string;
     platform: string;
     broswerVersion: string;
     phoneModel: string;
     network: string;
-    score: "A" | "B" | "C"
+    score: "A" | "B" | "C";
 }
 
-type excludeRecord = Omit<IPerformance,'record'>
+type excludeRecord = Omit<Performance,'record'>
 
 export interface PerformanceDbRecord extends excludeRecord{
-  record:string[];
+  record: string[];
 }
 
-interface IRecord {
+interface Record {
   fraction: number;
   time: number;
 }

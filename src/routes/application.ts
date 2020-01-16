@@ -1,4 +1,4 @@
-import ProjectController from '../controller/project-controller';
+import ProjectController from '../controller/application-controller';
 
 export default {
   prefix: '/api/application',

@@ -1,4 +1,4 @@
-export interface ProjectModel{
+export interface ApplicationModel{
   id: number;
   projectName: string; //项目名称
   createTime: Date; //创建时间
