@@ -4,13 +4,14 @@ import Application from '../entity/application';
 import { SuccessModel, ErrorModel } from '../utils/Response';
 import { ApplicationModel } from '../interfaces/application';
 import { queryGeneratorSql } from 'src/utils/queryToSql';
-import validatorApplication from '../validator/application';
-import { handlerPagination } from '../utils/handlerPagination';
+import { handlerPagination ,PageinMixin} from '../utils/handlerPagination';
+import { getApplicationListValidator, insertApplicationValidator } from '../validator/application';
 
 export default class ProjectService {
   static async addNewProject(ctx?: Context): Promise<ErrorModel | SuccessModel> {
     const projectRepository = getManager().getRepository(Application)
     const projectInfo: ApplicationModel = ctx.request.body
+
     const newProjectData = projectRepository.create({
       projectName: projectInfo.projectName,
       platform: projectInfo.platform,
@@ -18,34 +19,43 @@ export default class ProjectService {
       running: projectInfo.running || false,
       creator: projectInfo.creator
     })
+
+    const error = insertApplicationValidator(newProjectData)
+
+    if (error) {
+      return new ErrorModel({ error, message: '数据格式错误' })
+    }
     projectRepository.save(newProjectData)
     return new SuccessModel(null, '添加成功')
   }
 
   static async getProjectList(ctx?: Context): Promise<ErrorModel | SuccessModel> {
     const projectRepository = getManager().getRepository(Application)
-    const projectInfo = handlerPagination(ctx.request.query)
-    // const sqlForm = { 
-    //   projectName: projectInfo.projectName,
-    //   running: !!Number(projectInfo.running),
-    //   creator: projectInfo.creator
-    // }
-    try {
-      validatorApplication(projectInfo)
-    } catch (e) {
-      return new ErrorModel(e)
-    }
-    const { pageSize = 1, pageNum = 10000, ...others } = { ...projectInfo, running: !!Number(projectInfo.running) }
 
-    const result = await projectRepository
+    interface Application extends ApplicationModel,PageinMixin{}
+
+    const projectInfo: Application = handlerPagination<ApplicationModel>(ctx.request.query)
+  
+    const error = getApplicationListValidator(projectInfo)
+    
+    if (error) {
+      console.log('error: ', error);
+      return new ErrorModel({ error, message: '数据格式错误' })
+    }
+    const { pageSize, pageNum, ...others } = { 
+      ...projectInfo,
+      running: !!Number(projectInfo.running) 
+    }
+
+    const result = projectRepository
       .createQueryBuilder("application")
       .where(...queryGeneratorSql(others, 'application'))
       .orderBy("application.id", 'ASC')
-      .offset((pageNum - 1) * pageSize)
-      .limit(pageSize)
-      .getMany()
+      
+    const list = await result.offset((pageNum - 1) * pageSize).limit(pageSize).getMany()
+    const count = await result.getCount()
+    const countPage = Math.round(count/pageSize)
 
-
-    return new SuccessModel({ list: result, pageNum, pageSize })
+    return new SuccessModel({ list, count, countPage, pageNum, pageSize })
   }
 }

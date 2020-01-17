@@ -1,10 +1,9 @@
-interface PageinMixin {
-  pageNum: number|string;
-  pageSize: number|string;
-  [name: string]: any;
+export interface PageinMixin {
+  pageNum: any;
+  pageSize: any;
 }
-export function handlerPagination<T>(form: T & PageinMixin ): T{
-  form.pageNum = +form.pageNum
-  form.pageSize = +form.pageSize 
+export function handlerPagination<T>(form: T & PageinMixin): T & PageinMixin{
+  form.pageNum = +form.pageNum || 1
+  form.pageSize = +form.pageSize  || 10
   return form
 }

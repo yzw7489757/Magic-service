@@ -28,7 +28,7 @@ abstract class BaseModel {
 export class SuccessModel extends BaseModel {
   public code: SuccessCode
 
-  constructor(data:any, message ='操作成功'){
+  constructor(data: any, message ='操作成功'){
     super({
       error: false,
       data:data,

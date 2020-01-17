@@ -1,12 +1,10 @@
 export interface Validator{
   type: string;
-  properties: TypeProp;
+  properties: {
+      [name: string]: ValidateAttribute;
+  };
   additionalProperties: boolean;
   required: string[];
-}
-
-interface TypeProp{
-  [name: string]: ValidateAttribute;
 }
 
 interface ValidateAttribute{
@@ -21,4 +19,14 @@ interface ValidateAttribute{
 
 type UnRequiredAndOmit<T,K extends string> = { 
   [P in Exclude<keyof T, K>]?: T[P];
+}
+
+export interface InvalidError{
+  keyword: string;
+  dataPath: string;
+  schemaPath: string;
+  params: { 
+    [attr: string]: string;
+  };
+  message: string;
 }

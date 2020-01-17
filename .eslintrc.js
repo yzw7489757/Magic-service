@@ -22,6 +22,7 @@ module.exports = {
     ],
     "rules": {
         "no-unused-vars": ['warn'],
-        "no-console":"off"
+        "no-console":"off",
+        "@typescript-eslint/no-explicit-any":0
     }
 };

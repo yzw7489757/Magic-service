@@ -11,7 +11,7 @@ const ajv = new Ajv({
  * @param {*} schema JSON Schema 规则
  * @param {*} [data={}] 校验数据源
  */
-function validator(schema: Validator, data = {}): void | import('ajv').ErrorObject {
+export function validator(schema: Validator, data = {}): void | import('ajv').ErrorObject {
   const valid = ajv.validate(schema, data)
 
   if (!valid) {
@@ -19,5 +19,7 @@ function validator(schema: Validator, data = {}): void | import('ajv').ErrorObje
   }
 }
 
-export default validator
-
+export function generatorErrorValidaMsg(error: Ajv.ErrorObject, data: any): string {
+  const key = /\w+/.exec(error.dataPath)
+  return `field :${key ? key[0] : error.dataPath} ${error.message} ${key ? `, but it's ${data[key[0]]}` : ''}`
+}

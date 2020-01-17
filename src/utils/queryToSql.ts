@@ -1,10 +1,10 @@
 interface GetSimpleKey {
-  [name: string]: string | number | boolean | Date;
+  [name: string]: any;
 }
 
 /**
  * Request Query 转 SQL Where
- *
+ * 去除了无效的参数 比如空字符串 和 undefined,仅适用于Query Get
  * @export queryGeneratorSql
  * @template T
  * @param {T} obj SQL Query

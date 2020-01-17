@@ -12,7 +12,7 @@ export default class Application {
   createTime: Date; //创建时间
 
   @Column()
-  platform: 'H5' | 'Hybrid' | 'PC' | 'all';// 项目运行环境
+  platform: 'H5' | 'Hybrid' | 'PC';// 项目运行环境
 
   @Column('boolean')
   running: boolean;  // 服务状态
