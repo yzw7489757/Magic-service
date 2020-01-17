@@ -7,9 +7,17 @@ Magic Platform Service
 ```
 .
 ├── src
+│   ├── conf
 │   ├── controller      //controller层
 │   ├── service         //service层
-│   ├── routes.ts       //路由
+│   ├── entity          //数据模型
+│   ├── interface
+│   ├── middlewares
+│   ├── routes          //路由层
+│   ├── services        //业务逻辑层
+│   ├── types
+│   ├── utils
+│   ├── validator       //数据校验
 │   └── index.ts        //项目入口index.js
 ├── ecosystem.config.js //pm2配置
 ├── nodemon.json        //nodemon配置

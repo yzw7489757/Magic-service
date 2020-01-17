@@ -37,7 +37,7 @@ const schema = {
     }
     // creator: string;  // 创建者 
   },
-  additionalProperties: true, //不允许其他属性
+  additionalProperties: false, //不允许其他属性
   required: ["pageSize", "pageNum"]
 }
 
