@@ -16,7 +16,7 @@ export default class ProjectService {
       projectName: projectInfo.projectName,
       platform: projectInfo.platform,
       createTime: projectInfo.createTime,
-      running: projectInfo.running || false,
+      running: projectInfo.running,
       creator: projectInfo.creator
     })
 
@@ -42,10 +42,7 @@ export default class ProjectService {
       console.log('error: ', error);
       return new ErrorModel({ error, message: '数据格式错误' })
     }
-    const { pageSize, pageNum, ...others } = { 
-      ...projectInfo,
-      running: !!Number(projectInfo.running) 
-    }
+    const { pageSize, pageNum, ...others } = projectInfo
 
     const result = projectRepository
       .createQueryBuilder("application")

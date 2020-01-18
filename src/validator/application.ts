@@ -1,6 +1,5 @@
 import { ApplicationModel } from "src/interfaces/application"
 import {validator,generatorErrorValidaMsg} from "./validate"
-import * as Ajv from 'ajv';
 import { InsertApplicationModel } from '../interfaces/application';
 
 const getQuerySchema = {
@@ -29,7 +28,7 @@ const getQuerySchema = {
     // },
     running: {
       type: 'string',
-      enum: ['0', '1']
+      enum: ['0', '1', '']
     },
     creator: {
       type: 'string',
