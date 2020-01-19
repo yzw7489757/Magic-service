@@ -8,7 +8,7 @@ export default class Performance {
   @Column()
   projectId: number;
 
-  @Column("simple-array")
+  @Column('simple-array')
   record: string[];
 
   @Column()
@@ -26,6 +26,6 @@ export default class Performance {
   @Column()
   network: string; // 网络
 
-  @Column("enum", { enum: ["A", "B", "C"] })
-  score:string; //评分
+  @Column('enum', { enum: ['A', 'B', 'C'] })
+  score: string; //评分
 }

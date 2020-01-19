@@ -2,16 +2,16 @@ import PerformanceController from '../controller/performance-controller';
 
 export default {
   prefix: '/api/performance',
-  routes:[
+  routes: [
     {
       path: '/insert',
       method: 'post',
-      action: PerformanceController.insert
+      action: PerformanceController.insert,
     },
     {
       path: '/list',
       method: 'get',
-      action: PerformanceController.list
-    }
-  ]
+      action: PerformanceController.list,
+    },
+  ],
 };

@@ -2,16 +2,21 @@ import ProjectController from '../controller/application-controller';
 
 export default {
   prefix: '/api/application',
-  routes:[
+  routes: [
     {
       path: '/insert',
       method: 'post',
-      action: ProjectController.addNewProject
+      action: ProjectController.addNewProject,
     },
     {
       path: '/list',
       method: 'get',
-      action: ProjectController.getProjectList
-    }
-  ]
+      action: ProjectController.getProjectList,
+    },
+    {
+      path: '/update',
+      method: 'post',
+      action: ProjectController.updateProject,
+    },
+  ],
 };

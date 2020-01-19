@@ -12,11 +12,11 @@ export default class Application {
   createTime: Date; //创建时间
 
   @Column()
-  platform: 'H5' | 'Hybrid' | 'PC';// 项目运行环境
+  platform: 'H5' | 'Hybrid' | 'PC'; // 项目运行环境
 
   @Column()
-  running: '0' | '1';  // 服务状态  0关闭 1启动 2全部
+  running: '0' | '1'; // 服务状态  0关闭 1启动
 
   @Column()
-  creator: string;  // 创建者 
+  creator: string; // 创建者
 }

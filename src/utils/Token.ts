@@ -1,5 +1,6 @@
-import * as jwt from 'jsonwebtoken'
+import * as jwt from 'jsonwebtoken';
 import { JWT_KEY } from '../conf/secretKeys';
+// import jwt = require('koa-jwt');
 
 /**
  * token期限为4h
@@ -8,7 +9,7 @@ import { JWT_KEY } from '../conf/secretKeys';
  * @param {*} [payload={}]
  * @returns
  */
-export function getToken(payload = {}) {
+export function getToken(payload = {}): string {
   return jwt.sign(payload, JWT_KEY, { expiresIn: '4h' });
 }
 /**
@@ -18,6 +19,6 @@ export function getToken(payload = {}) {
  * @param {string} token
  * @returns
  */
-export function getJWTPayload(token:string) {
+export function getJWTPayload(token: string): any {
   return jwt.verify(token.split(' ')[1], JWT_KEY);
 }

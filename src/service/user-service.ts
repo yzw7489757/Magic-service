@@ -6,76 +6,77 @@ import { SuccessModel, ErrorModel } from '../utils/Response';
 import encryptionPw from '../utils/cryp';
 import { getToken } from '../utils/Token';
 
-
 export default class UserService {
   /**
    * 注册用户
-   * @static 
+   * @static
    * @param {Context} [context]
    * @returns 操作结果
    * @memberof UserService
    */
-  static async register(context?: Context): Promise<ErrorModel|SuccessModel>{
+  static async register(context?: Context): Promise<ErrorModel | SuccessModel> {
     const registerRepository = getManager().getRepository(RegisteredUser);
     const registerData: RegisteredUser = context.request.body;
 
     const result = await registerRepository.findOne({
-      userName: registerData.userName
-    })
-    if(result) {
+      userName: registerData.userName,
+    });
+    if (result) {
       return new ErrorModel({
-        error: '账户已存在'
-      })
+        error: '账户已存在',
+      });
     }
-    try{
+    try {
       const newUser = registerRepository.create({
-        nickName:registerData.nickName,
-        userName:registerData.userName,
-        password:encryptionPw(registerData.password),
-        department:registerData.department,
-        phone: registerData.phone
-      })
-      
-      await registerRepository.save(newUser);
-      return new SuccessModel(null,'注册成功')
-    }catch(e) {
-      return new ErrorModel({
-        error: e
-      })
-    }
-    
-  }
-/**
- * 登录
- *
- * @static
- * @param {Context} [context]
- * @memberof UserService
- */
-static async login(context?: Context): Promise<ErrorModel|SuccessModel>{
-    const registerRepository = getManager().getRepository(RegisteredUser);
-    const registerData: Login  = context.request.body;
-    
-    const result = await registerRepository.findOne({
-      userName: registerData.userName
-    })
+        nickName: registerData.nickName,
+        userName: registerData.userName,
+        password: encryptionPw(registerData.password),
+        department: registerData.department,
+        phone: registerData.phone,
+      });
 
-    if(!result){
+      await registerRepository.save(newUser);
+      return new SuccessModel(null, '注册成功');
+    } catch (e) {
       return new ErrorModel({
-        error: '未找到该用户，请核对账号'
-      })
+        error: e,
+      });
     }
-    if(result.password !== encryptionPw(registerData.password)){
+  }
+  /**
+   * 登录
+   *
+   * @static
+   * @param {Context} [context]
+   * @memberof UserService
+   */
+  static async login(context?: Context): Promise<ErrorModel | SuccessModel> {
+    const registerRepository = getManager().getRepository(RegisteredUser);
+    const registerData: Login = context.request.body;
+
+    const result = await registerRepository.findOne({
+      userName: registerData.userName,
+    });
+
+    if (!result) {
       return new ErrorModel({
-        error:'密码错误'
-      })
+        error: '未找到该用户，请核对账号',
+      });
     }
-    return new SuccessModel({
-      token:getToken({userName:registerData.userName, password:registerData.password}),
-      nickName: result.nickName,
-      phone: result.phone,
-      department: result.department,
-      userName: result.userName
-    },'登录成功')
+    if (result.password !== encryptionPw(registerData.password)) {
+      return new ErrorModel({
+        error: '密码错误',
+      });
+    }
+    return new SuccessModel(
+      {
+        token: getToken({ userName: registerData.userName, password: registerData.password }),
+        nickName: result.nickName,
+        phone: result.phone,
+        department: result.department,
+        userName: result.userName,
+      },
+      '登录成功',
+    );
   }
 }

@@ -2,7 +2,6 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export default class RegisteredUser {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,5 +18,5 @@ export default class RegisteredUser {
   phone: string;
 
   @Column()
-  department: string
+  department: string;
 }

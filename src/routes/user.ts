@@ -1,17 +1,17 @@
-import UserController from '../controller/user-controller'
+import UserController from '../controller/user-controller';
 
 export default {
   prefix: '/api/user',
-  routes:[
+  routes: [
     {
       path: '/register',
       method: 'post',
-      action: UserController.register
+      action: UserController.register,
     },
     {
       path: '/login',
       method: 'post',
-      action: UserController.login
+      action: UserController.login,
     },
-  ]
-}
+  ],
+};

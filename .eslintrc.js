@@ -1,12 +1,17 @@
 module.exports = {
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "commonjs":true
     },
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins":[
+        "prettier"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -21,6 +26,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "prettier/prettier":"warn",
         "no-unused-vars": ['warn'],
         "no-console":"off",
         "@typescript-eslint/no-explicit-any":0

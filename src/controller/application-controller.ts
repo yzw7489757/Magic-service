@@ -9,9 +9,9 @@ export default class ProjectController {
    * @param {Context} ctx
    * @memberof ProjectController
    */
-  static async addNewProject (ctx: Context): Promise<Context>{
-    ctx.body = await ProjectService.addNewProject(ctx)
-    return ctx
+  static async addNewProject(ctx: Context): Promise<Context> {
+    ctx.body = await ProjectService.addNewProject(ctx);
+    return ctx;
   }
 
   /**
@@ -21,8 +21,21 @@ export default class ProjectController {
    * @param {Context} ctx
    * @memberof ProjectController
    */
-  static async getProjectList(ctx: Context): Promise<Context>{
-    ctx.body = await ProjectService.getProjectList(ctx)
-    return ctx
+  static async getProjectList(ctx: Context): Promise<Context> {
+    ctx.body = await ProjectService.getProjectList(ctx);
+    return ctx;
+  }
+
+  /**
+   * 更新子应用信息
+   *
+   * @static
+   * @param {Context} ctx
+   * @returns {Promise<Context>}
+   * @memberof ProjectController
+   */
+  static async updateProject(ctx: Context): Promise<Context> {
+    ctx.body = await ProjectService.updateProject(ctx);
+    return ctx;
   }
 }
