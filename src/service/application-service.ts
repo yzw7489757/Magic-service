@@ -3,7 +3,7 @@ import { getManager, getConnection } from 'typeorm';
 import Application from '../entity/application';
 import { SuccessModel, ErrorModel } from '../utils/Response';
 import { ApplicationModel, UpdateAppInfo } from '../interfaces/application';
-import { queryGeneratorSql } from 'src/utils/queryToSql';
+import { queryGeneratorSql } from '../sutils/queryToSql';
 import { handlerPagination, PageinMixin } from '../utils/handlerPagination';
 import { getApplicationListValidator, insertApplicationValidator, updateApplicationValidator } from '../validator/application';
 import { filterInvaildField } from '../utils/queryToSql';

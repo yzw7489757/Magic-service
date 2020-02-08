@@ -1,6 +1,5 @@
-import { ApplicationModel } from 'src/interfaces/application';
 import { validator, generatorErrorValidaMsg } from './validate';
-import { InsertApplicationModel, UpdateAppInfo } from '../interfaces/application';
+import { InsertApplicationModel, UpdateAppInfo, ApplicationModel } from '../interfaces/application';
 
 const getQuerySchema = {
   type: 'object',
