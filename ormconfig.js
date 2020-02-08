@@ -5,7 +5,7 @@ module.exports = {
   host: '127.0.0.1',
   port: 3306,
   username: 'root',
-  password: 'a7489757',
+  password: IS_DEV ? 'a7489757' : 'Yzw7489757.',
   database: 'magic_db',
   synchronize: true,
   logging: false,
