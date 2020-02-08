@@ -1,5 +1,5 @@
 const env = process.env.NODE_ENV;
-
+const IS_DEV = env === 'dev';
 module.exports = {
   type: 'mysql',
   host: '127.0.0.1',
@@ -9,5 +9,5 @@ module.exports = {
   database: 'magic_db',
   synchronize: true,
   logging: false,
-  entities: [`${env == 'dev' ? 'src' : 'dist'}/entity/*{.ts,.js}`]
+  entities: [`${IS_DEV ? 'src' : 'dist'}/entity/*{.ts,.js}`],
 };
