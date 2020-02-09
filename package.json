@@ -13,7 +13,8 @@
     "start": "cross-env NODE_ENV=dev nodemon",
     "build": "rm -rf dist && tsc",
     "pro": "node_modules/.bin/pm2 start --env=production",
-    "stop": "node_modules/.bin/pm2 stop all"
+    "stop": "node_modules/.bin/pm2 stop all",
+    "ops": "rm -rf ./node_modules && npm i && npm run build && npm run pro"
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
