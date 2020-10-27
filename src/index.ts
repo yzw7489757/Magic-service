@@ -45,8 +45,7 @@ createConnection()
 
     // 错误处理
     onerror(app);
-    // 处理jwt 401
-    app.use(errorHandle);
+   
 
     app.use(
       jwt({
@@ -55,6 +54,9 @@ createConnection()
         path: [/^\/api\/user/, /^\/api\/performance\/insert/],
       }),
     );
+
+     // 处理jwt 401
+    app.use(errorHandle);
 
     app.keys = [SESSION_KEY];
 
@@ -75,6 +77,6 @@ createConnection()
     app.use(logger());
     app.listen(port);
 
-    console.log(`application running at port:${port}`);
+    console.log(`server running at port:${port}`);
   })
   .catch(error => console.log('TypeORM 链接失败: ', error));

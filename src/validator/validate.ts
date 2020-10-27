@@ -2,7 +2,7 @@ import * as Ajv from 'ajv';
 import { Validator } from '../interfaces/validator';
 
 const ajv = new Ajv({
-  // allErrors:true,
+  // allErrors: true,
 });
 /**
  * 校验数据

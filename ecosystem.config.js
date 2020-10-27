@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/camelcase */
 const { name } = require('./package.json');
 const path = require('path');
 
@@ -13,12 +15,12 @@ module.exports = {
       max_memory_restart: '1G',
       env: {
         NODE_ENV: 'development',
-        PORT: 3000
+        PORT: 3000,
       },
       env_production: {
         NODE_ENV: 'production',
-        PORT: 8080
-      }
-    }
-  ]
+        PORT: 8080,
+      },
+    },
+  ],
 };

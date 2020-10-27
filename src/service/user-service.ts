@@ -16,11 +16,12 @@ export default class UserService {
    */
   static async register(context?: Context): Promise<ErrorModel | SuccessModel> {
     const registerRepository = getManager().getRepository(RegisteredUser);
-    const registerData: RegisteredUser = context.request.body;
+    const registerData = context.request.body as RegisteredUser;
 
     const result = await registerRepository.findOne({
       userName: registerData.userName,
     });
+    
     if (result) {
       return new ErrorModel({
         error: '账户已存在',
@@ -31,8 +32,7 @@ export default class UserService {
         nickName: registerData.nickName,
         userName: registerData.userName,
         password: encryptionPw(registerData.password),
-        department: registerData.department,
-        phone: registerData.phone,
+        email: registerData.email,
       });
 
       await registerRepository.save(newUser);
@@ -72,8 +72,7 @@ export default class UserService {
       {
         token: getToken({ userName: registerData.userName, password: registerData.password }),
         nickName: result.nickName,
-        phone: result.phone,
-        department: result.department,
+        email: result.email,
         userName: result.userName,
       },
       '登录成功',

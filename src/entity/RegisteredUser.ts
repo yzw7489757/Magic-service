@@ -15,8 +15,5 @@ export default class RegisteredUser {
   nickName: string;
 
   @Column()
-  phone: string;
-
-  @Column()
-  department: string;
+  email: string;
 }

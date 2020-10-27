@@ -1,5 +1,6 @@
 const env = process.env.NODE_ENV;
 const IS_DEV = env === 'dev';
+
 module.exports = {
   type: 'mysql',
   host: '127.0.0.1',
